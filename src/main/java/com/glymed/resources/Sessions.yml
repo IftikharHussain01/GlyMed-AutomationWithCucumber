@@ -1,0 +1,14 @@
+LOCAL:
+ URL: 'https://uat.glymedplus.com/login'
+ PRO_USER: 'glymed@tech9.com'
+ PRO_PASSWORD: 'tech9team'
+ RETAIL_USER: 'glymed+retail@tech9.com'
+ RETAIL_PASSWORD: 'tech9team'
+ SCHOOL_USER: 'taylor.roper@tech9.co'
+ SCHOOL_PASSWORD: 'tech9team'
+ JSON_PATH: '/src/main/java/com/glymed/resources/TestData_SIT.json'
+
+
+UAT:
+ URL: 'https://uat.glymedplus.com/login'
+ JSON_PATH: '/src/main/java/com/glymed/resources/TestData_UAT.json'

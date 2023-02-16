@@ -1,0 +1,14 @@
+/Users/mac913334/POC/glymed-automation/src/main/java/glymed/pageobjects/loginandregistration/DashboardPage.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/context/TestContext.java
+/Users/mac913334/POC/glymed-automation/src/main/java/glymed/pageobjects/manager/PageObjectManager.java
+/Users/mac913334/POC/glymed-automation/src/main/java/glymed/pageobjects/loginandregistration/LoginAndRegistrationFlowPages.java
+/Users/mac913334/POC/glymed-automation/src/main/java/glymed/pageobjects/loginandregistration/ProductsPage.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/utilities/Log.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/utilities/Reporter.java
+/Users/mac913334/POC/glymed-automation/src/main/java/glymed/pageobjects/loginandregistration/CheckOutPage.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/utilities/CreateWebDriverInstance.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/utilities/FileUtils.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/config/Config.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/context/ScenarioContext.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/context/Context.java
+/Users/mac913334/POC/glymed-automation/src/main/java/com/glymed/commonFunctions/CommonFunction.java
