@@ -1,11 +1,8 @@
 package glymed.pageobjects.manager;
 
 import com.glymed.commonFunctions.CommonFunction;
-import glymed.pageobjects.loginandregistration.CheckOutPage;
-import glymed.pageobjects.loginandregistration.DashboardPage;
-import glymed.pageobjects.loginandregistration.ProductsPage;
+import glymed.pageobjects.loginandregistration.*;
 import org.openqa.selenium.WebDriver;
-import glymed.pageobjects.loginandregistration.LoginAndRegistrationFlowPages;
 
 public class PageObjectManager {
 
@@ -16,6 +13,10 @@ public class PageObjectManager {
     private DashboardPage dashboardPage;
     private ProductsPage productsPage;
     private CheckOutPage checkOutPage;
+    private ProductSearchPage productSearchPage;
+    private ExfoliatorProductPurchase exfoliatorProductPurchase;
+    private SerumProductPage serumProductPage;
+    private MoisturizerProductPage moisturizerProductPage;
 
 
     public PageObjectManager(WebDriver driver, CommonFunction comfun) {
@@ -37,5 +38,21 @@ public class PageObjectManager {
 
     public CheckOutPage getCheckOutPage() {
         return (checkOutPage == null) ? checkOutPage = new CheckOutPage(driver, comfun) : checkOutPage;
+    }
+
+    public ProductSearchPage getProductSearchPage(){
+        return (productSearchPage == null) ? productSearchPage = new ProductSearchPage(driver,comfun) : productSearchPage;
+    }
+
+    public ExfoliatorProductPurchase getExfoliatorProductPurchase(){
+        return (exfoliatorProductPurchase == null) ? exfoliatorProductPurchase = new ExfoliatorProductPurchase(driver,comfun) : exfoliatorProductPurchase;
+    }
+
+    public SerumProductPage getSerumProductPage(){
+        return (serumProductPage == null) ? serumProductPage = new SerumProductPage(driver,comfun) : serumProductPage;
+    }
+
+    public MoisturizerProductPage getMoisturizerProductPage(){
+        return (moisturizerProductPage == null) ? moisturizerProductPage = new MoisturizerProductPage(driver,comfun) : moisturizerProductPage;
     }
 }

@@ -27,7 +27,6 @@ public class Reporter {
 
     public boolean wordReportCreator(String scenarioName, String excelFilePath, String wordFilePath, String screenshotPath, int sheetNo, int columnNo) {
         String wordFileName = null;
-//		wordFileName = findRowText(scenarioName, excelFilePath,sheetNo,columnNo);
         if (wordFileName == null) {
             wordFileName = scenarioName;
         }

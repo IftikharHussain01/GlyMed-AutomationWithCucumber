@@ -5,6 +5,9 @@ import glymed.pageobjects.loginandregistration.LoginAndRegistrationFlowPages;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import java.awt.*;
+
 import static org.junit.Assert.assertTrue;
 
 public class LoginRegistrationFlowSteps {
@@ -17,7 +20,7 @@ public class LoginRegistrationFlowSteps {
     }
 
     @Given("user navigate to glymed home page")
-    public void userNavigateToGlymedHomePage() {
+    public void userNavigateToGlymedHomePage() throws InterruptedException, AWTException {
         TextContext.com_fun.navigateToUrl(TextContext.config.getProperty("URL"));
         loginRegistration.acceptCookies();
     }

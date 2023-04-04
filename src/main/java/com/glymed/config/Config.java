@@ -21,11 +21,11 @@ public class Config {
             fis = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/com/glymed/resources/config.properties");
             conf.load(fis);
             //set browser property
-            String browserProperty = System.getProperty("browser");
-            System.out.println(System.getProperty("browser"));
-            String browser = (browserProperty != null) ? browserProperty : "CHROME";
-            conf.setProperty("BROWSER", browser);
-            System.setProperty("BROWSER",browser);
+//            String browserProperty = System.getProperty("browser");
+//            System.out.println(System.getProperty("browser"));
+//            String browser = (browserProperty != null) ? browserProperty : "CHROME";
+            conf.setProperty("BROWSER", conf.getProperty("browser"));
+            System.setProperty("BROWSER", conf.getProperty("browser"));
             
             //set environment property
             String platformProperty = System.getProperty("platform");

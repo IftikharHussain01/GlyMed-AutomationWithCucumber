@@ -6,6 +6,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.awt.*;
+
 
 public class LoginAndRegistrationFlowPages {
 
@@ -24,7 +26,7 @@ public class LoginAndRegistrationFlowPages {
     @FindBy(xpath = "//*[contains(text(),'Personal Service')]")
     WebElement signInPageHeader;
 
-    @FindBy(xpath = "(//button[text()='Sign In'])[2]")
+    @FindBy(xpath = "//button[@type='submit']")
     WebElement signInButton;
 
     @FindBy(xpath = "//input[@type='email']")
@@ -36,30 +38,35 @@ public class LoginAndRegistrationFlowPages {
     @FindBy(xpath = "//a[contains(text(),'Forgot your password')]")
     WebElement forgotPassword;
 
-    public void acceptCookies(){
+    public void acceptCookies() throws InterruptedException, AWTException {
         try {
-            if (comfun.isElementPresent(cookiesAcceptButton)){
+            if (comfun.isElementPresent(cookiesAcceptButton)) {
                 cookiesAcceptButton.click();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.info("Cookies Message is not displayed");
         }
     }
 
-    public boolean validateGlymedSignInPage(){
+    public boolean validateGlymedSignInPage() {
         return signInPageHeader.isDisplayed() && signInButton.isDisplayed()
                 && emailAddressField.isDisplayed() && passwordField.isDisplayed() && forgotPassword.isDisplayed();
     }
 
-    public void enterUserName(String userName){
+    public void enterUserName(String userName) {
         emailAddressField.sendKeys(userName);
     }
 
-    public void enterPassword(String password){
+    public void enterPassword(String password) {
         passwordField.sendKeys(password);
     }
 
-    public void clickSigninButton(){
-        signInButton.click();
+    public void clickSigninButton() {
+        try {
+            comfun.clickElement(signInButton);
+        } catch (Exception e) {
+            Log.error("Sign In button is not clicked" + e.getMessage());
+        }
+
     }
 }

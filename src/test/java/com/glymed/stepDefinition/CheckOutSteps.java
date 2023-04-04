@@ -2,6 +2,7 @@ package com.glymed.stepDefinition;
 
 import com.glymed.context.Context;
 import com.glymed.context.TestContext;
+import com.glymed.utilities.Log;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -23,8 +24,10 @@ public class CheckOutSteps {
     }
 
     @Then("validate checkout screen is displayed and validate the amount")
-    public void validateCheckoutScreenIsDisplayedAndValidateTheAmount() {
+    public void validateCheckoutScreenIsDisplayedAndValidateTheAmount() throws InterruptedException {
         assertTrue("Cart Page is not displayed", checkOutPage.validateCartScreen());
+
+        Log.info("Sub Total of the cutomer is : " + checkOutPage.getSubTotalAmount());
     }
 
     @And("user click on checkout button")
@@ -42,6 +45,12 @@ public class CheckOutSteps {
     @Then("user select the shipping option as standard")
     public void userSelectTheShippingOptionAsStandard() {
         checkOutPage.clickChooseShippingOption();
+        testContext.getScenarioContext().setContext(Context.Shipping_Method, checkOutPage.getShippingMethod());
+    }
+
+    @And("user click on shipping dropdown")
+    public void userClickOnShippingDropdown() {
+        checkOutPage.clickShippingDropdown();
     }
 
     @And("user enter the instruction as {string}")
@@ -56,6 +65,9 @@ public class CheckOutSteps {
 
     @And("validate user has payment method available as card")
     public void validateUserHasPaymentMethodAvailableAsCard() {
+        checkOutPage.enterCardDetails();
+//        checkOutPage.enterCardName();
+//        checkOutPage.enterCardNumber();
         assertTrue("payment method is not displayed", checkOutPage.validatePaymentMethod());
     }
 
@@ -91,5 +103,45 @@ public class CheckOutSteps {
         String actual = checkOutPage.getTotalAmountAfterOrderPlace().replace(" ", "");
         System.out.println("Actual: " + actual);
         assertEquals("The Amount is not equal: ", expected, actual);
+    }
+
+    @And("user click on close button for checkout screen")
+    public void userClickOnCloseButtonForCheckoutScreen() {
+        checkOutPage.clickCheckoutCloseButton();
+    }
+
+    @And("user selects the shipping option by Air")
+    public void userSelectsTheShippingOptionByAir() throws InterruptedException {
+        checkOutPage.clickChooseAirShippingOption();
+        testContext.getScenarioContext().setContext(Context.Shipping_Method, checkOutPage.getShippingMethod());
+        Thread.sleep(2000);
+        Log.info("Shipping and Handling Amount is :" + checkOutPage.getShippingAndHandlingAmount());
+    }
+
+    @And("user selects the shipping option by second day")
+    public void userSelectsTheShippingOptionBySecondDay() throws InterruptedException {
+        checkOutPage.clickChooseSecondAirShippingOption();
+        testContext.getScenarioContext().setContext(Context.Shipping_Method, checkOutPage.getShippingMethod());
+        Thread.sleep(2000);
+        Log.info("Shipping and Handling Amount is :" + checkOutPage.getShippingAndHandlingAmount());
+    }
+
+    @Then("user get redeemable points of the customer")
+    public void userGetRedeemablePointsOfTheCustomer() {
+        Log.info("Customer is redeeming the points : " + checkOutPage.getRedeemablePoints());
+    }
+
+    @And("user checkMark to use the points")
+    public void userCheckMarkToUseThePoints() {
+        checkOutPage.setUseMyPointsCheckMark();
+    }
+
+    @And("validate that shipping method is same as per the user selection")
+    public void validateThatShippingMethodIsSameAsPerTheUserSelection() {
+        String expected = testContext.getScenarioContext().getContext(Context.Shipping_Method).toString();
+        Log.info("Expected Shipping Method :" + expected);
+        String actual = checkOutPage.getSuccessScreenShippingMethod();
+        Log.info("Actual Shipping Method :" + actual);
+        assertEquals("The Shipping Method is not equal: ", expected, actual);
     }
 }

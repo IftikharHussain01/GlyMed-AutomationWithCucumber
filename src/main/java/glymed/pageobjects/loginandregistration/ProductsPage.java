@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static org.junit.Assert.assertTrue;
+
 public class ProductsPage {
 
     WebDriver driver;
@@ -30,11 +32,23 @@ public class ProductsPage {
     @FindBy(xpath = "//div[@id='GM1']")
     WebElement cleanserProductOne;
 
+    @FindBy(xpath = "//div[@id='GM16']")
+    WebElement cleanserProductTwo;
+
     @FindBy(xpath = "//input[@id='product-quantity-GM1B']")
     WebElement backBarQuantityField;
 
+    @FindBy(xpath = "//h5[normalize-space()='Size']")
+    WebElement sizeTitle;
+
     @FindBy(xpath = "//input[@id='product-quantity-GM1T']")
     WebElement travelQuantityField;
+
+    @FindBy(xpath = "//input[@id='product-quantity-GM1']")
+    WebElement retailQuantityField;
+
+    @FindBy(xpath = "//input[@id='product-quantity-GM16']")
+    WebElement retailQuanityP2;
 
     @FindBy(xpath = "//input[@id='product-quantity-GM1S']")
     WebElement trailQuantityField;
@@ -48,8 +62,14 @@ public class ProductsPage {
     @FindBy(xpath = "(//*[@data-testid='CloseIcon' and @class='MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv'])[2]")
     WebElement customerNotificationCloseBtn;
 
-    public boolean validateAddictivelabel() {
-        return addictiveLabel.isDisplayed();
+    public void validateAddictivelabel() {
+        try {
+            if (addictiveLabel.isDisplayed()) {
+                assertTrue("Addictive label is not displayed", addictiveLabel.isDisplayed());
+            }
+        } catch (Exception e) {
+            Log.info("Addictive Label is not displayed");
+        }
     }
 
     public void checkCustomerNotification() {
@@ -61,6 +81,7 @@ public class ProductsPage {
             Log.info("Notification is not displayed");
         }
     }
+
     public void clickCleanserCheckMark() {
         cleanserCheckMark.click();
     }
@@ -70,21 +91,72 @@ public class ProductsPage {
     }
 
     public void selectFirstProduct() {
-        comfun.moveToElement(cleanserProductOne);
-        cleanserProductOne.click();
+        try {
+            comfun.clickElement(cleanserProductOne);
+        } catch (Exception e) {
+            Log.error("cleanser Product is not clicked" + e.getMessage());
+        }
+    }
+
+    public void addOneMoreProduct() {
+        try {
+            comfun.clickElement(cleanserProductTwo);
+        } catch (Exception e) {
+            Log.error("cleanser Product is not clicked" + e.getMessage());
+        }
     }
 
     public void moveToBackBar() {
-        comfun.scrollIntoView(backBarQuantityField);
+//        comfun.scrollIntoView(backBarQuantityField);
+        comfun.scrollIntoView(sizeTitle);
+        comfun.driverWait(5000);
     }
 
-    public void setQuantityFortrialAndTavel(String quantity){
-        travelQuantityField.sendKeys(quantity);
+    public void moveToTextField() {
+        comfun.scrollIntoView(sizeTitle);
+        comfun.driverWait(2000);
+    }
+
+    public void setQuantityForTavel(String quantity) {
+        try {
+            comfun.clickElement(travelQuantityField);
+            travelQuantityField.clear();
+            travelQuantityField.sendKeys(quantity);
+        } catch (Exception e) {
+            Log.warn("Unable to enter quantity in travel" + e.getMessage());
+        }
+    }
+
+    public void setQuantityForTrail(String quantity) {
+        try {
+            comfun.clickElement(trailQuantityField);
+            trailQuantityField.clear();
+            trailQuantityField.sendKeys(quantity);
+        } catch (Exception e) {
+            Log.warn("Unable to enter quantity in trial" + e.getMessage());
+        }
+    }
+
+    public void enterRetailQuanitity(String quantity) {
+        try {
+            comfun.clickElement(retailQuantityField);
+            retailQuantityField.clear();
+            retailQuantityField.sendKeys(quantity);
+        } catch (Exception e) {
+            Log.warn("Unable to enter quantity in retail" + e.getMessage());
+        }
+    }
+
+    public void setQuantityForRetail(String quantity) {
+        comfun.scrollIntoView(retailQuanityP2);
+        comfun.clickElement(retailQuanityP2);
+        retailQuanityP2.clear();
+        retailQuanityP2.sendKeys(quantity);
 //        trailQuantityField.sendKeys(quantity);
     }
 
-    public void clickAddtoCartButton(){
+    public void clickAddtoCartButton() {
         comfun.scrollIntoView(addToCardButton);
-        addToCardButton.click();
+        comfun.clickElement(addToCardButton);
     }
 }

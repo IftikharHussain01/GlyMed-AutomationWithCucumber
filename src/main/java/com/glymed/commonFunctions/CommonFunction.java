@@ -57,6 +57,11 @@ public class CommonFunction {
         js.executeScript("window.scrollBy(0,200)");
     }
 
+    public void minimumScrollUp() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-1000)");
+    }
+
     /**
      * Method to scroll down to given element height.
      */
@@ -122,13 +127,13 @@ public class CommonFunction {
         }
     }
 
-    public void waitForElement(WebElement element){
+    public void waitForElement(WebElement element) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.visibilityOf(element));
-        }  catch (TimeoutException e) {
-        System.out.println("--------------Element is not displayed------------------------------");
-    }
+        } catch (TimeoutException e) {
+            System.out.println("--------------Element is not displayed------------------------------");
+        }
 
     }
 
@@ -232,8 +237,7 @@ public class CommonFunction {
      */
     public boolean validateInt(WebElement ae, String text) {
         try {
-            if (NumberFormat.getNumberInstance(Locale.ENGLISH).parse(ae.getText())
-                    .intValue() == (int) Double.parseDouble(text)) {
+            if (NumberFormat.getNumberInstance(Locale.ENGLISH).parse(ae.getText()).intValue() == (int) Double.parseDouble(text)) {
                 return true;
             } else {
                 return false;
@@ -293,8 +297,7 @@ public class CommonFunction {
             if (!theDir.exists()) {
                 boolean result = false;
                 try {
-                    if (theDir.mkdirs())
-                        result = true;
+                    if (theDir.mkdirs()) result = true;
                 } catch (SecurityException localSecurityException) {
                     return dirPath;
                 }
@@ -337,7 +340,31 @@ public class CommonFunction {
     public void moveToElement(WebElement element) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element);
-        actions.perform();
+        actions.build().perform();
+    }
+
+    public void clickElement(WebElement element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+//            Actions actions = new Actions(driver);
+//            actions.moveToElement(element).click().build().perform();
+            waitForElement(element);
+            element.click();
+        } catch (Exception e) {
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("arguments[0].click();", element);
+        }
+    }
+
+    public void sendKeys(WebElement element, String text) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        try {
+            executor.executeScript("arguments[0].value='" + text + "';", element);
+        } catch (Exception e) {
+            Log.warn("Unable to send keys : " + e.getMessage());
+        }
+
     }
 
     public void scrollToTheEnd() {

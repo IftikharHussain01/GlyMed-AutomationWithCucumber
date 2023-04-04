@@ -1,6 +1,7 @@
 package com.glymed.stepDefinition;
 
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import glymed.pageobjects.loginandregistration.DashboardPage;
@@ -27,4 +28,8 @@ public class DashboardSteps {
         dashboardPage.clickProductsOption();
     }
 
+    @And("user click on glymed label from dashboard")
+    public void userClickOnGlymedLabelFromDashboard() {
+        dashboardPage.clickGlyMedLabel();
+    }
 }
